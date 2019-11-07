@@ -1,4 +1,0 @@
-Flask
-Flask-Bootstrap
-gunicorn 
-numpy
