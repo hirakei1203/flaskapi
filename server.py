@@ -36,7 +36,8 @@ def result():
         image = np.array(image_pil, 'uint8')
         # 類似度を出力
         label, predict_Confidence = recognizer.predict(image)
-        predict_Confidence = str(predict_Confidence)
+        result = round(predict_Confidence)
+        predict_Confidence = str(result)
         # render_template('./result.html')
         return render_template('./result.html', title='類似度', predict_Confidence=predict_Confidence)
 
