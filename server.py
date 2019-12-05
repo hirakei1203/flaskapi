@@ -51,6 +51,5 @@ if __name__ == '__main__':
 #     デプロイのため、パスを変更してみました。。。
 #     app.run(host='0.0.0.0', port=5000)
 
-
 # opencv-contrib-pythonが,heroku上で機能していない？
 
