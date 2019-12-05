@@ -33,6 +33,7 @@ def result():
 #     recognizer = cv2.face.LBPHFaceRecognizer_create()
     # submitした画像が存在したら処理する
     if request.files['image']:
+        load_model()
         # 白黒画像として読み込み
         image_pil = Image.open(request.files['image']).convert('L')
         image = np.array(image_pil, 'uint8')
