@@ -30,7 +30,7 @@ def index():
 @app.route('/result', methods=['POST'])
 def result():
 #     recognizerメソッドの定義のため、以下を追加→ローカルで動かんので削除
-    recognizer = face.LBPHFaceRecognizer_create()
+#     recognizer = cv2.face.LBPHFaceRecognizer_create()
     # submitした画像が存在したら処理する
     if request.files['image']:
         # 白黒画像として読み込み
