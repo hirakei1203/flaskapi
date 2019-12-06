@@ -17,6 +17,7 @@ def load_model():
     cascadePath = './haarcascade_frontalface_alt.xml'
     faceCascade = cv2.CascadeClassifier(cascadePath)
     recognizer = cv2.face.LBPHFaceRecognizer_create()
+    # エラー回避のため、以下に記述変更
     # recognizer = cv2.face.createLBPHFaceRecognizer()
     # recognizer = cv2.face.LBPHFaceRecognizer.create()
     recognizer.read('./sample_model.yml2')
