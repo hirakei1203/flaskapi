@@ -15,7 +15,6 @@ def load_model():
     global recognizer
     print(" * Loading pre-trained model ...")
     cascadePath = './haarcascade_frontalface_alt.xml'
-    help(cv2.face)
     faceCascade = cv2.CascadeClassifier(cascadePath)
     recognizer = cv2.face.LBPHFaceRecognizer_create()
     # recognizer = cv2.face.createLBPHFaceRecognizer()
