@@ -6,7 +6,6 @@ import os
 import string
 from PIL import Image
 from flask_bootstrap import Bootstrap
-# from fontawesome as fab
 
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
@@ -29,8 +28,6 @@ def index():
 
 @app.route('/result', methods=['POST'])
 def result():
-#     recognizerメソッドの定義のため、以下を追加→ローカルで動かんので削除
-#     recognizer = cv2.face.LBPHFaceRecognizer_create()
     # submitした画像が存在したら処理する
     if request.files['image']:
         load_model()
@@ -43,13 +40,12 @@ def result():
         predict_Confidence = str(result)
         # render_template('./result.html')
         return render_template('./result.html', title='類似度', predict_Confidence=predict_Confidence)
+    else:
+        return render_template('./flask_api_index.html')
+
 
 if __name__ == '__main__':
     load_model()
     app.debug = True
     app.run(host='localhost', port=5000)
-#     デプロイのため、パスを変更してみました。。。
-#     app.run(host='0.0.0.0', port=5000)
-
-# opencv-contrib-pythonが,heroku上で機能していない？
 
