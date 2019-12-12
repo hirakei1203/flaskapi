@@ -10,6 +10,9 @@ from flask_bootstrap import Bootstrap
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
 
+UPLOAD_FOLDER = './uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 def load_model():
     global recognizer
     print(" * Loading pre-trained model ...")
@@ -30,6 +33,11 @@ def index():
 def result():
     # submitした画像が存在したら処理する
     if request.files['image']:
+        img_file = request.files['image']
+        fileName = img_file.filename
+        img_file.save(os.path.join(app.config['UPLOAD_FOLDER'], fileName))
+        img_url = '/uploads/' + fileName
+        
         load_model()
         # 白黒画像として読み込み
         image_pil = Image.open(request.files['image']).convert('L')
@@ -39,9 +47,14 @@ def result():
         result = round(predict_Confidence)
         predict_Confidence = str(result)
         # render_template('./result.html')
-        return render_template('./result.html', title='類似度', predict_Confidence=predict_Confidence)
+        
+        return render_template('./result.html', title='類似度', predict_Confidence=predict_Confidence, img_url=img_url)
     else:
         return render_template('./flask_api_index.html')
+
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 
 if __name__ == '__main__':
